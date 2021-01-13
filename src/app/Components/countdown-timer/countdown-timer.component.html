@@ -1,0 +1,23 @@
+<div class="container text-center">
+    <h1><strong>Countdown Timer</strong></h1>
+</div>
+
+
+<div class="text-center">
+    <div class="countdown-plate">
+        {{ (countdownService.count | async).milliseconds | timer }}
+    </div>
+    <div>
+        <input class="input-text" type="number" #input placeholder="Enter the time in minutes" />
+    </div>
+    <div class="start-pause">
+        <button class="btn" style="background-color: #4CAF50;" (click)="countdownService.start(input.value * 60000)" *ngIf="!hasRemainingTime(countdownService.count | async)">Start</button>
+        <button class="btn" style="background-color: #f10404;" (click)="countdownService.cancel()" *ngIf="hasRemainingTime(countdownService.count | async)">Cancel</button>           
+        <button class="btn" style="background-color: #62696d; margin-left: 5px;" (click)="countdownService.pause()" *ngIf="!(countdownService.count | async).paused && hasRemainingTime(countdownService.count | async)">Pause</button>
+        <button class="btn" style="background-color: #4CAF50;" (click)="countdownService.resume()" *ngIf="(countdownService.count | async).paused">Resume</button>
+    </div>
+</div>
+
+
+
+
